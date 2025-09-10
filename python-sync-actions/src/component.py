@@ -217,6 +217,12 @@ class Component(ComponentBase):
         endpoint = ep.get("endpoint", "").lstrip("/")
         placeholders = ep.get("placeholders", {})
         params = ep.get("params", {})
+        user_params = self._configuration.user_parameters if self._configuration else {}
+        params = self._conf_helpers.fill_in_user_parameters(
+            params,
+            user_params,
+            evaluate_conf_objects_functions=True
+        )
 
         try:
             formatted_path = endpoint.format(**placeholders)
@@ -238,7 +244,7 @@ class Component(ComponentBase):
         Get values to hide
         Args:
         """
-        user_params = self._configuration.user_parameters
+        user_params = self._configuration.user_parameters if self._configuration else {}
         secrets = [value for key, value in user_params.items() if key.startswith("#") or key.startswith("__")]
 
         # get secrets from the auth method
