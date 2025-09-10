@@ -25,14 +25,6 @@
           }
         }
       ],
-      "test": "test-value",
-      "concat": {
-        "function": "concat",
-        "args": [
-          "hello",
-          "-world"
-        ]
-      },
       "debug": false,
       "outputBucket": "in.c-",
       "incrementalOutput": false,
