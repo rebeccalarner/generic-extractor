@@ -613,8 +613,11 @@ class ConfigHelpers:
 
         """
         function_cfg = self.fill_in_time_references(function_cfg)
+        # if it's list process recursively
+        if isinstance(function_cfg, list):
+            return [self.perform_custom_function(key, item, user_params) for item in function_cfg]
         if not isinstance(function_cfg, dict):
-            # in case the function was evaluated as time
+            # in case the function was evaluated as time or is a primitive
             return function_cfg
 
         elif function_cfg.get("attr"):
