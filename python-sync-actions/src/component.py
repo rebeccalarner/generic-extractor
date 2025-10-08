@@ -631,7 +631,25 @@ class Component(ComponentBase):
     @sync_action("test_request")
     @sync_action_exception_handler
     def test_request(self):
-        results, response, log, error_message = self.make_call()
+        try:
+            results, response, log, error_message = self.make_call()
+        except Exception as e:
+            return {
+                "response": {
+                    "status_code": None,
+                    "reason": f"Configuration Error: {repr(e)}",
+                    "data": None,
+                    "headers": {},
+                },
+                "request": {
+                    "url": None,
+                    "method": None,
+                    "data": None,
+                    "headers": {},
+                },
+                "records": [],
+                "debug_log": f"Error during configuration/initialization: {repr(e)}",
+            }
 
         body = None
         if response.request.body:
