@@ -337,7 +337,7 @@ def build_api_request(configuration: dict) -> List[Tuple[ApiRequest, RequestCont
         method = endpoint_config.get("method", "GET")
 
         # evaluate functions inside the params
-        user_parameters = configuration.get("parameters", {}).get("config", {})
+        user_parameters = configuration.get("config", {})
         params = endpoint_config.get("params", {})
         params = ConfigHelpers().fill_in_user_parameters(params, user_parameters, evaluate_conf_objects_functions=True)
         request_content = build_request_content(method, params)
