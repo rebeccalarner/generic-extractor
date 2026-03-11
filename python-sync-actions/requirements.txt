@@ -20,7 +20,7 @@ keboola-component==1.6.8
     # via -r requirements.txt
 keboola-http-client==1.0.1
     # via -r requirements.txt
-keboola-json-to-csv==0.0.13
+keboola-json-to-csv==0.0.14
     # via -r requirements.txt
 keboola-utils==1.1.0
     # via -r requirements.txt
